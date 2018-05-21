@@ -22,6 +22,3 @@ twbs:bootstrap@3.3.6
 accounts-ui
 accounts-password
 momentjs:moment
-accounts-facebook
-accounts-google
-accounts-twitter
