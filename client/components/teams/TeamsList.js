@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createContainer } from 'meteor/react-meteor-data';
+import { withTracker } from 'meteor/react-meteor-data';
 import { Teams } from '../../../imports/collections/teams';
 
 class TeamsList extends Component {
@@ -22,7 +22,7 @@ class TeamsList extends Component {
               Edit
             </button>
           }
-          {team._id}
+          {team.createdAt}
           {this.props.userId &&
             <span className="pull-right">
               <button className="btn btn-danger"
@@ -53,11 +53,11 @@ class TeamsList extends Component {
   }
 }
 
-export default createContainer(() => {
+export default withTracker((props) => {
   Meteor.subscribe('teams');
 
   return {
     teams: Teams.find({}).fetch(),
     userId: Meteor.userId()
   };
-}, TeamsList);
+})(TeamsList);
