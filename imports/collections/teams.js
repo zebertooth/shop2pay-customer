@@ -6,19 +6,34 @@ export const Teams = new Mongo.Collection('teams');
 Meteor.methods({
   'teams.insert': function () {
     return Teams.insert({
+      teamName: null,
       createdAt: moment().valueOf(),
-      updatedAt: null
+      updatedAt: null,
+      hiddenAt: null,
+      creatorId: this.userId,
+      updaterId: null,
+      hiddenId: null
     });
   },
-  'teams.update': function (_id, updates) {
-    return Teams.update(_id,
+  'teams.remove': function (team) {
+    return Teams.remove(team);
+  },
+  'teams.update': function (team) {
+    return Teams.update(team._id,
       {
-        ...updates,
-        updatedAt: moment().valueOf()
+        ...team,
+        updatedAt: moment().valueOf(),
+        updaterId: this.userId
       }
     );
   },
-  'teams.remove': function (_id) {
-    return Teams.remove(_id);
+  'teams.hide': function (team) {
+    return Teams.update(team._id,
+      {
+        ...team,
+        hiddenAt: moment().valueOf(),
+        hiddenId: this.userId
+      }
+    );
   }
 });

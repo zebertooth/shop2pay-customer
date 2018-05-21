@@ -3,11 +3,7 @@ import React, { Component } from 'react';
 import Accounts from './Accounts';
 
 class Header extends Component {
-  handleClick(e) {
-    e.preventDefault();
 
-    Meteor.call('teams.insert');
-  }
   render() {
     return (
       <nav className="nav navbar-default">
@@ -17,12 +13,6 @@ class Header extends Component {
         <ul className="nav navbar-nav">
           <li>
             <Accounts />
-          </li>
-          <li>
-            <a href="#"
-              onClick={this.handleClick.bind(this)}>
-              Create Team
-            </a>
           </li>
         </ul>
       </nav>
