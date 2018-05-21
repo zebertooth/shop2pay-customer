@@ -17,16 +17,20 @@ class TeamsList extends Component {
     return this.props.teams.map((team) => {
       return (
         <li className="list-group-item" key={team._id}>
-          <button className="btn btn-info">
-            Edit
-          </button>
-          {team._id}
-          <span className="pull-right">
-            <button className="btn btn-danger"
-              onClick={() => {this.handleRemoveClick(team)}}>
-              X
+          {this.props.userId &&
+            <button className="btn btn-info">
+              Edit
             </button>
-          </span>
+          }
+          {team._id}
+          {this.props.userId &&
+            <span className="pull-right">
+              <button className="btn btn-danger"
+                onClick={() => {this.handleRemoveClick(team)}}>
+                X
+              </button>
+            </span>
+          }
         </li>
       );
     });
@@ -35,12 +39,14 @@ class TeamsList extends Component {
   render() {
     return (
       <ul className="list-group">
-        <li className="list-group-item">
-          <button className="btn btn-primary"
-            onClick={this.handleClick.bind(this)}>
-            Create
-          </button>
-        </li>
+        {this.props.userId &&
+          <li className="list-group-item">
+            <button className="btn btn-primary"
+              onClick={this.handleClick.bind(this)}>
+              Create
+            </button>
+          </li>
+        }
         {this.renderList()}
       </ul>
     );
@@ -51,6 +57,7 @@ export default createContainer(() => {
   Meteor.subscribe('teams');
 
   return {
-    teams: Teams.find({}).fetch()
+    teams: Teams.find({}).fetch(),
+    userId: Meteor.userId()
   };
 }, TeamsList);
