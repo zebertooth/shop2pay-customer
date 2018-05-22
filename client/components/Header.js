@@ -6,15 +6,17 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="nav navbar-default">
-        <div className="navbar-header">
-          <a className="navbar-brand">Authen-Twbs</a>
+      <nav className="navbar navbar-default">
+        <div className="container-fluid">
+          <div className="navbar-header">
+            <a className="navbar-brand">Authen-Twbs</a>
+          </div>
+          <ul className="nav navbar-nav">
+            <li>
+              <Accounts />
+            </li>
+          </ul>
         </div>
-        <ul className="nav navbar-nav">
-          <li>
-            <Accounts />
-          </li>
-        </ul>
       </nav>
     );
   }
