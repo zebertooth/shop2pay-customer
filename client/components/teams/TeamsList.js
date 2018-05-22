@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
+import FlipMove from 'react-flip-move';
+
 import { Teams } from '../../../imports/collections/teams';
 
 class TeamsList extends Component {
@@ -17,20 +19,17 @@ class TeamsList extends Component {
     return this.props.teams.map((team) => {
       return (
         <li className="list-group-item" key={team._id}>
-          {this.props.userId &&
-            <button className="btn btn-info">
-              Edit
+          <button className="btn btn-info">
+            Edit
+          </button>
+
+          {` ${team.createdAt}`}
+          <span className="pull-right">
+            <button className="btn btn-danger"
+              onClick={() => {this.handleRemoveClick(team)}}>
+              X
             </button>
-          }
-          {team.createdAt}
-          {this.props.userId &&
-            <span className="pull-right">
-              <button className="btn btn-danger"
-                onClick={() => {this.handleRemoveClick(team)}}>
-                X
-              </button>
-            </span>
-          }
+          </span>
         </li>
       );
     });
@@ -38,17 +37,21 @@ class TeamsList extends Component {
 
   render() {
     return (
-      <ul className="list-group">
+      <div>
         {this.props.userId &&
-          <li className="list-group-item">
-            <button className="btn btn-primary"
-              onClick={this.handleClick.bind(this)}>
-              Create
-            </button>
-          </li>
+          <ul className="list-group">
+            <li className="list-group-item">
+              <button className="btn btn-primary"
+                onClick={this.handleClick.bind(this)}>
+                Create
+              </button>
+            </li>
+            <FlipMove maintainContainerHeight={true}>
+              {this.renderList()}
+            </FlipMove>
+          </ul>
         }
-        {this.renderList()}
-      </ul>
+      </div>
     );
   }
 }
