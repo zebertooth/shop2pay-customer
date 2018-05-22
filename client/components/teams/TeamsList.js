@@ -57,7 +57,7 @@ export default withTracker((props) => {
   Meteor.subscribe('teams');
 
   return {
-    teams: Teams.find({}).fetch(),
+    teams: Teams.find({}, {sort: {createdAt: -1}}).fetch(),
     userId: Meteor.userId()
   };
 })(TeamsList);
