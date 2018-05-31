@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import App from './components/App';
 import { Teams } from '../imports/collections/teams';
+import { Transactions } from '../imports/collections/transactions';
 
 const Routes = () => (
   <Router>

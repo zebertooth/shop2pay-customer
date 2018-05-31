@@ -5,6 +5,10 @@ import FlipMove from 'react-flip-move';
 import { Teams } from '../../../imports/collections/teams';
 
 class TeamsList extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   handleClick(e) {
     e.preventDefault();
 
