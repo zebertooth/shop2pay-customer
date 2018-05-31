@@ -9,7 +9,7 @@ class Header extends Component {
       <nav className="navbar navbar-default">
         <div className="container-fluid">
           <div className="navbar-header">
-            <a className="navbar-brand">Authen-Twbs</a>
+            <a className="navbar-brand">Shop2Pay-Customer</a>
           </div>
           <ul className="nav navbar-nav">
             <li>
