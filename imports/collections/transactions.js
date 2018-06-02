@@ -46,7 +46,7 @@ if (Meteor.isServer) {
       );
 
       if(_id) {
-        res.writeHead(201); // 201 Created
+        res.writeHead(202); // 202 Accepted
         res.end();
       } else {
         res.writeHead(503); // 503 Service Unavailable
@@ -74,12 +74,12 @@ Meteor.methods({
        // https://docs.meteor.com/api/http.html
        // https://themeteorchef.com/tutorials/using-the-http-package
        // https://www.tutorialspoint.com/meteor/meteor_http.htm
-       const endpoint = 'http://shop2pay-dev-test.herokuapp.com/api/transactions';
-       HTTP.post(endpoint, {
+       const endpoint = 'http://localhost:3000/api/transactions';
+       HTTP.call('POST', endpoint, {
          data: {
            ...one,
            client_transaction_id: _id,
-           transferred_datetime: one.createdAt
+           transferred_datetime: moment().valueOf()
          }
        }, (error, response) => {
          console.log(error);
