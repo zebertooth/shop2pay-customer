@@ -1,58 +1,38 @@
 import { Mongo } from 'meteor/mongo';
 import { moment } from 'meteor/momentjs:moment';
 import { HTTP } from 'meteor/http';
-import { WebApp } from 'meteor/webapp';
+import { Picker } from 'meteor/meteorhacks:picker';
+import bodyParser from 'body-parser';
 
 export const Transactions = new Mongo.Collection('transactions');
 
 if (Meteor.isServer) {
-  // Ref. https://forums.meteor.com/t/meteor-webapp-vs-picker-vs-simple-rest-for-rest-api/34034
-  // Ref. https://hashnode.com/post/web-api-using-meteor-webapp-ciqgn0ukj0irtdd53uy12h6ia
-  WebApp.connectHandlers.use('/api/transactions', (req, res, next) => {
-    res.setHeader('Content-Type', 'application/json');
+  // http://www.meteorpedia.com/read/REST_API
+  // https://forums.meteor.com/t/is-there-a-way-to-receive-requests-get-or-post-on-meteor-server/43127
+  // https://themeteorchef.com/tutorials/server-side-routing-with-picker
+  // https://forums.meteor.com/t/post-data-with-meteorhacks-picker/4657
+  Picker.middleware(bodyParser.json());
+  Picker.middleware(bodyParser.urlencoded( {extended: true} ) );
+  Picker.route('/api/transactions', function(params, req, res, next) {
 
-    if(req.method === 'POST') {
+    const body = req.body;
+    delete body._id;
 
-      const {
-          client_url,
-          client_rest_api_endpoint,
-          client_transaction_id,
-          bank_account,
-          bank_no,
-          bank_name,
-          bank_short_name,
-          amount,
-          transferred_datetime,
-          is_approved,
-          approved_datetime
-      } = req.query;
-
-      const _id = Transactions.update(client_transaction_id,
-        {
-          $set:{
-            client_url,
-            client_rest_api_endpoint,
-            client_transaction_id,
-            bank_account,
-            bank_no,
-            bank_name,
-            bank_short_name,
-            amount,
-            transferred_datetime,
-            is_approved,
-            approved_datetime
-          }
+    if (req.method === 'POST') {
+      const result = Transactions.update(body.client_transaction_id, {
+        $set: {
+          ...body,
+          approved_datetime: moment().valueOf()
         }
-      );
+      });
 
-      if(_id) {
+      if (result) {
         res.writeHead(202); // 202 Accepted
         res.end();
       } else {
         res.writeHead(503); // 503 Service Unavailable
         res.end();
       }
-
     } else {
       res.writeHead(403); // 403 Forbiden
       res.end();
@@ -67,14 +47,16 @@ Meteor.methods({
        createdAt: moment().valueOf(),
        creatorId: this.userId
      });
+
      const one = Transactions.findOne(_id);
-     console.log(one);
-     // return _id;
+     delete one._id;
+
      try {
        // https://docs.meteor.com/api/http.html
        // https://themeteorchef.com/tutorials/using-the-http-package
        // https://www.tutorialspoint.com/meteor/meteor_http.htm
-       const endpoint = 'http://localhost:3000/api/transactions';
+       // const endpoint = 'http://localhost:3000/api/transactions';
+       const endpoint = 'http://shop2pay-dev-test.herokuapp.com/api/transactions';
        HTTP.call('POST', endpoint, {
          data: {
            ...one,
@@ -82,8 +64,6 @@ Meteor.methods({
            transferred_datetime: moment().valueOf()
          }
        }, (error, response) => {
-         console.log(error);
-         console.log(response);
          if(error) {
            Transactions.remove(_id);
          }

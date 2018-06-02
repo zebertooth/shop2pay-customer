@@ -9,6 +9,6 @@ Meteor.startup(() => {
   });
 
   Meteor.publish('transactions', function () {
-    return Transactions.find({ creatorId: this.userId });
+    return Transactions.find({ creatorId: this.userId }, { sort: { createdAt: -1 } });
   });
 });

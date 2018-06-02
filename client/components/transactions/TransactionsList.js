@@ -8,9 +8,19 @@ class TransactionsList extends Component {
   constructor(props) {
     super(props);
 
+    // this.state = {
+    //   client_url: 'http://localhost:8080',
+    //   client_rest_api_endpoint: 'http://localhost:8080/api/transactions',
+    //   bank_account: 'John Deo',
+    //   bank_no: '999-9999-999-9',
+    //   bank_name: 'Kasikorn Bank',
+    //   bank_short_name: 'KBANK',
+    //   amount: 2699,
+    //   is_approved: false
+    // };
     this.state = {
-      client_url: 'http://localhost:8080',
-      client_rest_api_endpoint: 'http://localhost:8080/api/transactions',
+      client_url: 'http://shop2pay-customer.herokuapp.com/',
+      client_rest_api_endpoint: 'http://shop2pay-customer.herokuapp.com/api/transactions',
       bank_account: 'John Deo',
       bank_no: '999-9999-999-9',
       bank_name: 'Kasikorn Bank',
@@ -168,8 +178,8 @@ export default withTracker((props) => {
   Meteor.subscribe('transactions');
 
   return {
-    transactions: Transactions.find({is_approved: false}).fetch(),
-    is_approved_transactions: Transactions.find({is_approved: { $ne: false }}).fetch(),
+    transactions: Transactions.find({is_approved: false}, { sort: { createdAt: -1 } }).fetch(),
+    is_approved_transactions: Transactions.find({is_approved: { $ne: false }}, { sort: { createdAt: -1 } }).fetch(),
     userId: Meteor.userId(),
     meteorCall: Meteor.call
   };
