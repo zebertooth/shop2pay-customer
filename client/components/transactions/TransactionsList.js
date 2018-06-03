@@ -20,6 +20,7 @@ class TransactionsList extends Component {
     //   transfer_type: 'ATM',
     //   amount: 0,
     //   transferred_datetime: new Date(),
+    //   transfer_detail: '',
     //   is_approved: false
     // };
     this.state = {
@@ -32,6 +33,7 @@ class TransactionsList extends Component {
       transfer_type: 'ATM',
       amount: 2699,
       transferred_datetime: new Date(),
+      transfer_detail: '',
       is_approved: false
     };
   }
@@ -48,6 +50,7 @@ class TransactionsList extends Component {
       transfer_type,
       amount,
       transferred_datetime,
+      transfer_detail,
       is_approved
     } = this.state;
 
@@ -61,6 +64,7 @@ class TransactionsList extends Component {
       transfer_type,
       amount,
       transferred_datetime,
+      transfer_detail,
       is_approved
     });
   }
@@ -150,6 +154,13 @@ class TransactionsList extends Component {
     const transferred_datetime = date;
     console.log(transferred_datetime);
     this.setState({...this.state, transferred_datetime});
+  }
+  handleTransferDetailChange(e) {
+    const transfer_detail = e.target.value;
+    this.setState({
+      ...this.state,
+      transfer_detail
+    });
   }
   renderTransactions() {
     return this.props.transactions.map((tran) => {
@@ -246,6 +257,13 @@ class TransactionsList extends Component {
                 value={this.state.transferred_datetime}/>
 
             </div>
+          </div>
+
+          <div className="form-group">
+            <label>COMMENT:</label>
+            <textarea className="form-control"
+              value={this.state.transfer_detail}
+              onChange={this.handleTransferDetailChange.bind(this)}></textarea>
           </div>
 
           <input className="btn btn-primary" type="submit" />
