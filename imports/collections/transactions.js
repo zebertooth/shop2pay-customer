@@ -1,5 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 import { moment } from 'meteor/momentjs:moment';
+import moment_tz from 'moment-timezone';
 import { HTTP } from 'meteor/http';
 import { Picker } from 'meteor/meteorhacks:picker';
 import bodyParser from 'body-parser';
@@ -59,12 +60,12 @@ Meteor.methods({
        // Ref. https://themeteorchef.com/tutorials/using-the-http-package
        // Ref. https://www.tutorialspoint.com/meteor/meteor_http.htm
        // const endpoint = 'http://localhost:3000/api/transactions';
-       const endpoint = 'http://shop2pay-dev-test.herokuapp.com/api/transactions';
+       // const endpoint = 'http://shop2pay-dev-test.herokuapp.com/api/transactions';
+       const endpoint = 'http://www.shop2paytest.tk/api/transactions';
        HTTP.call('POST', endpoint, {
          data: {
            ...one,
-           client_transaction_id: _id,
-           transferred_datetime: moment().valueOf()
+           client_transaction_id: _id
          }
        }, (error, response) => {
          if(error) {
