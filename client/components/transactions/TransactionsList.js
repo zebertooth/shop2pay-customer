@@ -3,6 +3,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import FlipMove from 'react-flip-move';
 import DateTimePicker from 'react-datetime-picker';
 import numeral from 'numeral';
+import moment from 'moment';
 
 import { Transactions } from '../../../imports/collections/transactions';
 
@@ -19,7 +20,8 @@ class TransactionsList extends Component {
     //   bank_short_name: 'KBANK',
     //   transfer_type: 'ATM',
     //   amount: 0,
-    //   transferred_datetime: new Date(),
+    //   transferred_datetime: moment().format(),
+    //   date: moment().toDate(),
     //   transfer_detail: '',
     //   is_approved: false
     // };
@@ -32,7 +34,8 @@ class TransactionsList extends Component {
       bank_short_name: 'KBANK',
       transfer_type: 'ATM',
       amount: 2699,
-      transferred_datetime: new Date(),
+      transferred_datetime: moment().format(),
+      date: moment().toDate(),
       transfer_detail: '',
       is_approved: false
     };
@@ -151,9 +154,13 @@ class TransactionsList extends Component {
     });
   }
   onDateTimePickerChange = (date) => {
-    const transferred_datetime = date;
+    const transferred_datetime = moment(date).format();
     console.log(transferred_datetime);
-    this.setState({...this.state, transferred_datetime});
+    this.setState({
+      ...this.state,
+      transferred_datetime,
+      date
+    });
   }
   handleTransferDetailChange(e) {
     const transfer_detail = e.target.value;
@@ -254,7 +261,7 @@ class TransactionsList extends Component {
             <div>
               <DateTimePicker
                 onChange={this.onDateTimePickerChange}
-                value={this.state.transferred_datetime}/>
+                value={this.state.date}/>
 
             </div>
           </div>
