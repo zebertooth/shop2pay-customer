@@ -11,34 +11,34 @@ class TransactionsList extends Component {
   constructor(props) {
     super(props);
 
-    // this.state = {
-    //   client_url: 'http://localhost:8080',
-    //   client_rest_api_endpoint: 'http://localhost:8080/api/transactions',
-    //   bank_account: 'John Deo',
-    //   bank_no: '999-9999-999-9',
-    //   bank_name: 'กสิกรไทย',
-    //   bank_short_name: 'KBANK',
-    //   transfer_type: 'ATM',
-    //   amount: 0,
-    //   transferred_datetime: moment().format(),
-    //   date: moment().toDate(),
-    //   transfer_detail: '',
-    //   is_approved: false
-    // };
     this.state = {
-      client_url: 'http://shop2pay-customer.herokuapp.com/',
-      client_rest_api_endpoint: 'http://shop2pay-customer.herokuapp.com/api/transactions',
+      client_url: 'http://localhost:8080',
+      client_rest_api_endpoint: 'http://localhost:8080/api/transactions',
       bank_account: 'John Deo',
       bank_no: '999-9999-999-9',
       bank_name: 'กสิกรไทย',
       bank_short_name: 'KBANK',
       transfer_type: 'ATM',
-      amount: 2699,
+      amount: 0,
       transferred_datetime: moment().format(),
       date: moment().toDate(),
       transfer_detail: '',
       is_approved: false
     };
+    // this.state = {
+    //   client_url: 'http://shop2pay-customer.herokuapp.com/',
+    //   client_rest_api_endpoint: 'http://shop2pay-customer.herokuapp.com/api/transactions',
+    //   bank_account: 'John Deo',
+    //   bank_no: '999-9999-999-9',
+    //   bank_name: 'กสิกรไทย',
+    //   bank_short_name: 'KBANK',
+    //   transfer_type: 'ATM',
+    //   amount: 2699,
+    //   transferred_datetime: moment().format(),
+    //   date: moment().toDate(),
+    //   transfer_detail: '',
+    //   is_approved: false
+    // };
   }
   handleSubmit(e) {
     e.preventDefault();
