@@ -175,10 +175,11 @@ class TransactionsList extends Component {
         <div className="container" key={tran._id}>
           <div className="col-sm-1"><span className="glyphicon glyphicon-remove"></span></div>
           <div className="col-sm-2">{tran._id}</div>
-          <div className="col-sm-2">{tran.bank_short_name}</div>
+          <div className="col-sm-1">{tran.bank_short_name}</div>
           <div className="col-sm-2">{tran.transfer_type}</div>
           <div className="col-sm-1 text-right">{ numeral(tran.amount).format('0,0') } ฿</div>
-          <div className="col-sm-4">{tran.transferred_datetime.toString()}</div>
+          <div className="col-sm-3">{tran.transferred_datetime}</div>
+          <div className="col-sm-2">{tran.transfer_detail}</div>
         </div>
       );
     })
@@ -189,10 +190,11 @@ class TransactionsList extends Component {
         <div className="container" key={tran._id}>
           <div className="col-sm-1"><span className="glyphicon glyphicon-ok"></span></div>
           <div className="col-sm-2">{tran._id}</div>
-          <div className="col-sm-2">{tran.bank_short_name}</div>
+          <div className="col-sm-1">{tran.bank_short_name}</div>
           <div className="col-sm-2">{tran.transfer_type}</div>
           <div className="col-sm-1 text-right">{ numeral(tran.amount).format('0,0') } ฿</div>
-          <div className="col-sm-4">{tran.transferred_datetime.toString()}</div>
+          <div className="col-sm-3">{tran.transferred_datetime}</div>
+          <div className="col-sm-2">{tran.transfer_detail}</div>
         </div>
       );
     })
