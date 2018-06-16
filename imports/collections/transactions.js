@@ -14,7 +14,7 @@ if (Meteor.isServer) {
   // Ref. https://forums.meteor.com/t/post-data-with-meteorhacks-picker/4657
   Picker.middleware(bodyParser.json());
   Picker.middleware(bodyParser.urlencoded( {extended: true} ) );
-  Picker.route('/api/transactions', function(params, req, res, next) {
+  Picker.route('/api/v1/transactions', function(params, req, res, next) {
 
     const body = req.body;
     delete body._id;
@@ -59,9 +59,9 @@ Meteor.methods({
        // Ref. https://docs.meteor.com/api/http.html
        // Ref. https://themeteorchef.com/tutorials/using-the-http-package
        // Ref. https://www.tutorialspoint.com/meteor/meteor_http.htm
-       // const endpoint = 'http://localhost:3000/api/transactions';
-       // const endpoint = 'http://shop2pay-dev-test.herokuapp.com/api/transactions';
-       const endpoint = 'http://www.shop2paytest.tk/api/transactions';
+       // const endpoint = 'http://localhost:3000/api/v1/transactions';
+       // const endpoint = 'http://shop2pay-dev-test.herokuapp.com/api/v1/transactions';
+       const endpoint = 'http://www.shop2paytest.tk/api/v1/transactions';
        HTTP.call('POST', endpoint, {
          data: {
            ...one,
