@@ -106,27 +106,27 @@ class TransactionsList extends Component {
 
     switch (bank_short_name) {
       case 'KBANK':
-        bank_name = 'กสิกรไทย';
+        bank_name = 'Kasikorn Bank';
         break;
 
       case 'SCB':
-        bank_name = 'ไทยพาณิชย์';
+        bank_name = 'Siam Commercial';
         break;
 
       case 'BAY':
-        bank_name = 'กรุงศรี';
+        bank_name = 'Bank of Ayudhya';
         break;
 
       case 'GOV':
-        bank_name = 'ออมสิน';
+        bank_name = 'Goverment Saving Bank';
         break;
 
       case 'TMB':
-        bank_name = 'ทหารไทย';
+        bank_name = 'TMB Bank';
         break;
 
       case 'KTB':
-        bank_name = 'กรุงไทย';
+        bank_name = 'Krungthai Bank';
         break;
 
       default:
@@ -231,12 +231,12 @@ class TransactionsList extends Component {
             <label>BANK NAME:</label>
             <select multiple className="form-control"
               onChange={this.handleBankSelectChange.bind(this)}>
-              <option value="KBANK">กสิกรไทย (KBANK)</option>
-              <option value="SCB">ไทยพาณิชย์ (SCB)</option>
-              <option value="BAY">กรุงศรี (BAY)</option>
-              <option value="GOV">ออมสิน (GOV)</option>
-              <option value="TMB">ทหารไทย (TMB)</option>
-              <option value="KTB">กรุงไทย (KTB)</option>
+              <option value="KBANK">Kasikorn Bank (KBANK)</option>
+              <option value="SCB">Siam Commercial Bank (SCB)</option>
+              <option value="BAY">Bank of Ayudhya (BAY)</option>
+              <option value="GOV">Goverment Saving Bank (GOV)</option>
+              <option value="TMB">TMB Bank (TMB)</option>
+              <option value="KTB">Krungthai Bank (KTB)</option>
             </select>
           </div>
 
