@@ -26,7 +26,7 @@ class TransactionsList extends Component {
     //   is_approved: false
     // };
     this.state = {
-      client_url: 'http://shop2pay-customer.herokuapp.com/',
+      client_url: 'http://shop2pay-customer.herokuapp.com',
       client_rest_api_endpoint: 'http://shop2pay-customer.herokuapp.com/api/v1/transactions',
       bank_account: 'John Deo',
       bank_no: '999-9999-999-9',
