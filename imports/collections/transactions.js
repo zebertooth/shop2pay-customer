@@ -59,10 +59,10 @@ Meteor.methods({
         // Ref. https://docs.meteor.com/api/http.html
         // Ref. https://themeteorchef.com/tutorials/using-the-http-package
         // Ref. https://www.tutorialspoint.com/meteor/meteor_http.htm
-        const endpoint = 'http://localhost:3000/api/v1/transactions';
+        // const endpoint = 'http://localhost:3000/api/v1/transactions';
         // const endpoint = 'http://shop2pay-dev-test.herokuapp.com/api/v1/transactions';
         // const endpoint = 'http://www.shop2paytest.tk/api/v1/transactions';
-        // const endpoint = 'http://27.254.163.57/api/v1/transactions';
+        const endpoint = 'http://27.254.163.57/api/v1/transactions';
        HTTP.call('POST', endpoint, {
          data: {
            ...one,
